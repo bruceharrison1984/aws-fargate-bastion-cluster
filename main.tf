@@ -37,9 +37,9 @@ module "secrets" {
   default_tags = local.default_tags
 
   secret_map = {
-    "shared/bastion/ssh/public_pem"         = tls_private_key.bastion.public_key_openssh
-    "shared/bastion/ssh/private_pem"        = tls_private_key.bastion.private_key_pem
-    "shared/bastion/ssh/username"           = random_pet.bastion_username.id
+    "shared/bastion/ssh/public_pem"  = tls_private_key.bastion.public_key_openssh
+    "shared/bastion/ssh/private_pem" = tls_private_key.bastion.private_key_pem
+    "shared/bastion/ssh/username"    = random_pet.bastion_username.id
   }
 }
 
@@ -55,5 +55,5 @@ module "bastion" {
   public_key_secret_arn = module.secrets.secret_arn_map["shared/bastion/ssh/public_pem"].arn
   bastion_username      = module.secrets.secret_arn_map["shared/bastion/ssh/username"].arn
   security_group_ids    = []
-  container_count = 3
+  container_count       = 3
 }
